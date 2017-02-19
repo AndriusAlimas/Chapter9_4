@@ -27,9 +27,7 @@
 </c:if>
 <br>
  <%-- Continue with the rest of the page that EVERYONE should see --%>
- </h3><strong>The Brakes</strong><br>
- Our advanced anti-lock brake system (ABS) is engineered to give you the ability to steer even as you're stopping.
- We have the best speed sensors of any car this size. <br><hr>
+ </h3><jsp:include page="brakes.jsp" />
  
  <!-- Second VERSION -->
  <h1>SECOND VERSION using jsp scripting:</h1>
@@ -48,8 +46,31 @@
  		  out.println("Our brakes are the best.");
  	  }
  %>
- </h3><strong>The Brakes</strong><br>
- Our advanced anti-lock brake system (ABS) is engineered to give you the ability to steer even as you're stopping.
- We have the best speed sensors of any car this size. <br>
+ </h3><jsp:include page="brakes.jsp" />
+ 
+ <!--  Third VERSION -->
+ <h1>THIRD VERSION using &ltc:choose&gt tag and its partners &ltc:when&gt and &ltc:otherwise&gt:</h1>
+ <%-- First thing its like if else scripting but not like switch statement no fall - through --%>
+ 
+ <h3>
+ 	<c:choose><%-- you have to choose if you want to use if else structure --%>
+ 		<c:when test="${userPref == 'performance'}" > <%-- is like if, have attribute same test= what to test --%>
+ 			Now you can stop even if you <em>do</em> drive insanely fast..
+ 		</c:when>
+ 		
+ 		<c:when test="${userPref == 'safety'}" > <%-- like if else[if second time] --%>
+ 		    Our brakes won't lock up no matter how bad a driver you are.
+ 		</c:when>
+ 		
+ 		<c:when test="${userPref == 'maintanance'}" >
+ 		    Lost your tech job? No problem--you won't have to service these brakes for at least three years.
+ 		</c:when>
+ 		
+ 		<c:otherwise><%-- If none of the <c:when> tests are true, the <c:otherwise> runs as default same like else --%>
+ 			Our brakes are the best.
+ 		</c:otherwise>
+ 	</c:choose>
+ </h3><jsp:include page="brakes.jsp" />
+ 
 </body>
 </html>
