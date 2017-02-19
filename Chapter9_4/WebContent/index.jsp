@@ -12,6 +12,7 @@
 		<input type="radio" name="userPref" value="performance">Performance<br>
 		<input type="radio" name="userPref" value="safety">Safety<br>
 		<input type="radio" name="userPref" value="maintanance">Maintanance<br>
+		<input type="radio" name="userPref" value="none">None<br>
 		<p>
 		<br>
 		

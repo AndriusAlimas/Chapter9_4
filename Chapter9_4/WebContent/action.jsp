@@ -8,10 +8,48 @@
 <title>My page</title>
 </head>
 <body>
+<!-- First VERSION  -->
+<h1>FIRST VERSION using &ltc:if&gt:</h1>
 <%-- We set session attribute from request getParameter, because we want use it later on session scope --%>
 <% session.setAttribute("userPref", request.getParameter("userPref")); %>
 
 <%-- There is no way to do exactly what we want using <c:if> tag, because it doesn't have an else: --%>
+<c:if test="${userPref == 'performance'}" > <%-- if has attribute test, very important test= and what we testing --%>
+	<h3>Now you can stop even if you <em>do</em> drive insanely fast..</h3><%--this is if true --%>
+</c:if><%-- we dont have false, false is after if but you dont have if else like normal --%>
 
+<c:if test="${userPref == 'safety' }" >
+	<h3>Our brakes won't lock up no matter how bad a driver you are.</h3>
+</c:if>
+ 
+<c:if test="${userPref == 'maintanance' }" >
+	<h3>Lost your tech job? No problem--you won't have to service these brakes for at least three years.</h3>
+</c:if>
+<br>
+ <%-- Continue with the rest of the page that EVERYONE should see --%>
+ </h3><strong>The Brakes</strong><br>
+ Our advanced anti-lock brake system (ABS) is engineered to give you the ability to steer even as you're stopping.
+ We have the best speed sensors of any car this size. <br><hr>
+ 
+ <!-- Second VERSION -->
+ <h1>SECOND VERSION using jsp scripting:</h1>
+ <h3>
+ <%-- Now we use JSP with scripting, and it does what we want --%>
+ <% String pref = (String)session.getAttribute("userPref");
+ 	  if(pref.equals("performance")){
+ 		  out.println("Now you can stop even if you <em>do</em> drive insanely fast..");
+ 	  }else if (pref.equals("safety")){
+ 		  out.println("Our brakes won't lock up no matter how bad a driver you are.");
+ 	  }else if (pref.equals("maintanance")){
+ 		  out.println("Lost your tech job? No problem--you won't have to service these brakes " +
+ 				  "for at least three years.");
+ 	  }else {
+ 		  // This what we cannot do with <c:if> tag userPref doesn't match those, so print the default headline
+ 		  out.println("Our brakes are the best.");
+ 	  }
+ %>
+ </h3><strong>The Brakes</strong><br>
+ Our advanced anti-lock brake system (ABS) is engineered to give you the ability to steer even as you're stopping.
+ We have the best speed sensors of any car this size. <br>
 </body>
 </html>
